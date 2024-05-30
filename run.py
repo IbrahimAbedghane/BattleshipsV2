@@ -39,7 +39,7 @@ def place_ship(grid, size, ship_size):
                 for r in range(row, row + ship_size):
                     grid[r][col] = 'S'
                 break  
-              
+
 def make_guess(grid, size):
     """Prompts the user to make a valid guess."""
     while True:
@@ -53,3 +53,12 @@ def make_guess(grid, size):
             return row, col
         except ValueError as e:
             print(f"Invalid guess: {e}. Please enter row and column as two integers separated by a comma.")
+
+        def check_guess(grid, row, col):
+    """Checks if the guess is a hit or miss."""
+    if grid[row][col] == 'S':
+        grid[row][col] = 'X'
+        return True
+    elif grid[row][col] == '~':
+        grid[row][col] = 'O'
+    return False
