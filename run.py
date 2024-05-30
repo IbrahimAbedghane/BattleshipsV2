@@ -1,4 +1,4 @@
-import random 
+import random
 
 def create_grid(size):
     """Creates a size x size grid initialized with '~'."""
@@ -19,7 +19,7 @@ def get_grid_size():
                 raise ValueError
             return size
         except ValueError:
-            print("Invalid input. Please enter a positive integer."
+            print("Invalid input. Please enter a positive integer.")
 
 def place_ship(grid, size, ship_size):
     """Randomly places a ship of ship_size on the grid."""
@@ -38,7 +38,7 @@ def place_ship(grid, size, ship_size):
             if all(grid[r][col] == '~' for r in range(row, row + ship_size)):
                 for r in range(row, row + ship_size):
                     grid[r][col] = 'S'
-                break  
+                break
 
 def make_guess(grid, size):
     """Prompts the user to make a valid guess."""
@@ -54,7 +54,7 @@ def make_guess(grid, size):
         except ValueError as e:
             print(f"Invalid guess: {e}. Please enter row and column as two integers separated by a comma.")
 
-        def check_guess(grid, row, col):
+def check_guess(grid, row, col):
     """Checks if the guess is a hit or miss."""
     if grid[row][col] == 'S':
         grid[row][col] = 'X'
@@ -64,7 +64,7 @@ def make_guess(grid, size):
     return False
 
 def all_ships_sunk(grid):
-    """Checks if all ships on the grid have been sunk."""
+    """Checks if all ships on the grid are sunk."""
     return all(cell != 'S' for row in grid for cell in row)
 
 def main():
@@ -110,5 +110,5 @@ def main():
             print("Game over! The computer sank all your ships.")
             break
 
-if _name_ == "_main_":
+if __name__ == "_main_":
     main()
