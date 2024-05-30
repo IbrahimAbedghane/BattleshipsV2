@@ -66,3 +66,49 @@ def make_guess(grid, size):
 def all_ships_sunk(grid):
     """Checks if all ships on the grid have been sunk."""
     return all(cell != 'S' for row in grid for cell in row)
+
+def main():
+    """Main function to run the Battleships game."""
+    print("Welcome to Battleships!")
+    grid_size = get_grid_size()
+    player_grid = create_grid(grid_size)
+    computer_grid = create_grid(grid_size)
+
+    # Place ships for player and computer
+    for _ in range(5):  # Example: Place 5 ships of size 3
+        place_ship(player_grid, grid_size, 3)
+        place_ship(computer_grid, grid_size, 3)
+
+    print("Your grid:")
+    print_grid(player_grid)
+
+    while True:
+        # Player's turn
+        print("Your turn:")
+        row, col = make_guess(computer_grid, grid_size)
+        hit = check_guess(computer_grid, row, col)
+        print(f"{'Hit!' if hit else 'Miss!'}")
+        print("Computer's grid:")
+        print_grid([['~' if cell == 'S' else cell for cell in row] for row in computer_grid])
+
+        if all_ships_sunk(computer_grid):
+            print("Congratulations! You sank all the computer's ships!")
+            break
+
+        # Computer's turn (random guess)
+        print("Computer's turn:")
+        while True:
+            row, col = random.randint(0, grid_size - 1), random.randint(0, grid_size - 1)
+            if player_grid[row][col] not in ('X', 'O'):
+                break
+        hit = check_guess(player_grid, row, col)
+        print(f"Computer guessed ({row}, {col}) and it was a {'Hit!' if hit else 'Miss!'}")
+        print("Your grid:")
+        print_grid(player_grid)
+
+        if all_ships_sunk(player_grid):
+            print("Game over! The computer sank all your ships.")
+            break
+
+if _name_ == "_main_":
+    main()
