@@ -20,3 +20,22 @@ def get_grid_size():
             return size
         except ValueError:
             print("Invalid input. Please enter a positive integer."
+
+def place_ship(grid, size, ship_size):
+    """Randomly places a ship of ship_size on the grid."""
+    while True:
+        orientation = random.choice(['H', 'V'])
+        if orientation == 'H':
+            row = random.randint(0, size - 1)
+            col = random.randint(0, size - ship_size)
+            if all(grid[row][c] == '~' for c in range(col, col + ship_size)):
+                for c in range(col, col + ship_size):
+                    grid[row][c] = 'S'
+                break
+        else:
+            row = random.randint(0, size - ship_size)
+            col = random.randint(0, size - 1)
+            if all(grid[r][col] == '~' for r in range(row, row + ship_size)):
+                for r in range(row, row + ship_size):
+                    grid[r][col] = 'S'
+                break    
