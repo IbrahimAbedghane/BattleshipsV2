@@ -38,4 +38,18 @@ def place_ship(grid, size, ship_size):
             if all(grid[r][col] == '~' for r in range(row, row + ship_size)):
                 for r in range(row, row + ship_size):
                     grid[r][col] = 'S'
-                break    
+                break  
+              
+def make_guess(grid, size):
+    """Prompts the user to make a valid guess."""
+    while True:
+        try:
+            guess = input(f"Enter your guess (row,col) between 0 and {size-1}: ")
+            row, col = map(int, guess.split(','))
+            if row < 0 or row >= size or col < 0 or col >= size:
+                raise ValueError("Guess out of grid bounds.")
+            if grid[row][col] in ('X', 'O'):
+                raise ValueError("You've already guessed that position.")
+            return row, col
+        except ValueError as e:
+            print(f"Invalid guess: {e}. Please enter row and column as two integers separated by a comma.")
