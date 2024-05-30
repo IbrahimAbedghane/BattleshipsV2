@@ -62,3 +62,7 @@ def make_guess(grid, size):
     elif grid[row][col] == '~':
         grid[row][col] = 'O'
     return False
+
+def all_ships_sunk(grid):
+    """Checks if all ships on the grid have been sunk."""
+    return all(cell != 'S' for row in grid for cell in row)
