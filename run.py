@@ -116,5 +116,5 @@ def main():
             print("Game over! The computer sank all your ships.")
             break
 
-if _name_ == "_main_":
-    main(
+if __name__ == "_main_":
+    main()
