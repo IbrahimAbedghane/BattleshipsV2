@@ -2,6 +2,7 @@ import random
 
 def create_grid(size):
     """Creates a size x size grid initialized with '~'."""
+    print("Creating grid of size", size)  # Debug statement
     return [['~' for _ in range(size)] for _ in range(size)]
 
 def print_grid(grid):
@@ -17,12 +18,14 @@ def get_grid_size():
             size = int(input("Enter the grid size (e.g., 10 for a 10x10 grid): "))
             if size <= 0:
                 raise ValueError
+            print("Grid size is", size)  # Debug statement
             return size
         except ValueError:
             print("Invalid input. Please enter a positive integer.")
 
 def place_ship(grid, size, ship_size):
     """Randomly places a ship of ship_size on the grid."""
+    print("Placing ship of size", ship_size)  # Debug statement
     while True:
         orientation = random.choice(['H', 'V'])
         if orientation == 'H':
@@ -50,12 +53,14 @@ def make_guess(grid, size):
                 raise ValueError("Guess out of grid bounds.")
             if grid[row][col] in ('X', 'O'):
                 raise ValueError("You've already guessed that position.")
+            print(f"Guess is ({row}, {col})")  # Debug statement
             return row, col
         except ValueError as e:
             print(f"Invalid guess: {e}. Please enter row and column as two integers separated by a comma.")
 
 def check_guess(grid, row, col):
     """Checks if the guess is a hit or miss."""
+    print(f"Checking guess at ({row}, {col})")  # Debug statement
     if grid[row][col] == 'S':
         grid[row][col] = 'X'
         return True
@@ -65,6 +70,7 @@ def check_guess(grid, row, col):
 
 def all_ships_sunk(grid):
     """Checks if all ships on the grid are sunk."""
+    print("Checking if all ships are sunk")  # Debug statement
     return all(cell != 'S' for row in grid for cell in row)
 
 def main():
@@ -110,5 +116,5 @@ def main():
             print("Game over! The computer sank all your ships.")
             break
 
-if __name__ == "_main_":
-    main()
+if _name_ == "_main_":
+    main(
